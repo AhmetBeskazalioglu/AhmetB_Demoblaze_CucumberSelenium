@@ -6,6 +6,7 @@ import org.junit.Assert;
 
 public class HomePage extends BasePage{
 
+
     public void verifyWelcomeMessage(){
         BrowserUtils.waitForClickablility(nameOfUser, 5);
         String actual = nameOfUser.getText();

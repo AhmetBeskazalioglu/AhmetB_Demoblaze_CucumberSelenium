@@ -30,13 +30,9 @@ public class LoginPage extends BasePage{
         this.password.sendKeys(password);
         loginButton2.click();
     }
-    public void verifyErrorMessage(String errorMessage){
+    public void verifyErrorMessage(String expectedErrorMessage){
         Alert alert= Driver.get().switchTo().alert();
         String actual = alert.getText();
-        String expected = errorMessage;
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expectedErrorMessage, actual);
     }
-
-
-
 }
