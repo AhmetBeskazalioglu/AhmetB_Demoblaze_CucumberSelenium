@@ -13,4 +13,7 @@ public abstract class BasePage {
     public WebElement loginButton;
     @FindBy(id="nameofuser")
     public WebElement nameOfUser;
+
+    @FindBy(id = "cartur")
+    public WebElement cartButton;
 }

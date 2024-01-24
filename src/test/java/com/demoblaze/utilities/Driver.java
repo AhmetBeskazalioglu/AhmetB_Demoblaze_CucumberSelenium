@@ -39,8 +39,6 @@ public class Driver {
                     break;
 
                 case "edge":
-                    if (!System.getProperty("os.name").toLowerCase().contains("windows"))
-                        throw new WebDriverException("Your OS doesn't support Edge");
                     driver = new EdgeDriver();
                     break;
 
