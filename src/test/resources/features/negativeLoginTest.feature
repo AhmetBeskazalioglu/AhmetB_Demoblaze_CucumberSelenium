@@ -5,7 +5,7 @@ Feature: Negative Login Test
     Given The user navigates to website
 
   @wip
-  Scenario Outline: Negative Login Test 1 with scenario outline and data table
+  Scenario Outline: Negative Login Test 1 with scenario outline
     When The user clicks on login button and enters "<username>" and "<password>"
     Then The user verifies "<error>" message
     Examples:

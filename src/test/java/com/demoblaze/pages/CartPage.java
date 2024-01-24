@@ -3,6 +3,7 @@ package com.demoblaze.pages;
 import com.demoblaze.utilities.BrowserUtils;
 import com.demoblaze.utilities.ConfigurationReader;
 import com.demoblaze.utilities.Driver;
+import com.github.javafaker.Faker;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -12,6 +13,8 @@ import org.openqa.selenium.support.FindBy;
 public class CartPage extends BasePage {
 
     HomePage homePage = new HomePage();
+
+    Faker faker = new Faker();
 
     @FindBy(xpath = "//button[.='Place Order']")
     public WebElement placeOrderButton;
@@ -48,12 +51,13 @@ public class CartPage extends BasePage {
 
     public void fillForm() {
         BrowserUtils.waitForVisibility(nameField, 5);
-        nameField.sendKeys(ConfigurationReader.get("name"));
-        countryField.sendKeys(ConfigurationReader.get("country"));
-        cityField.sendKeys(ConfigurationReader.get("city"));
-        cardField.sendKeys(ConfigurationReader.get("card"));
-        monthField.sendKeys(ConfigurationReader.get("month"));
-        yearField.sendKeys(ConfigurationReader.get("year"));
+        nameField.sendKeys(faker.name().fullName());
+        countryField.sendKeys(faker.address().country());
+        cityField.sendKeys(faker.address().city());
+        cardField.sendKeys(faker.finance().creditCard());
+        monthField.sendKeys(faker.number().numberBetween(1, 12) + "");
+        yearField.sendKeys(faker.number().numberBetween(2022, 2030) + "");
+
     }
 
     public void verifyConfirmationMessage() {
@@ -63,14 +67,14 @@ public class CartPage extends BasePage {
         Assert.assertEquals(expected, actual);
     }
 
-    public void removeProductFromCart(String product) {
-        BrowserUtils.clickWithJS(cartButton);
+    public void removeProductFromCart(String product, String menuName) {
+        navigateToMenu(menuName);
         String productDeletexpath = "//td[.='" + product + "']/../td[.='Delete']/a";
         WebElement element = Driver.get().findElement(By.xpath(productDeletexpath));
         BrowserUtils.waitForClickablility(element, 5);
         String productAmountXPath = "//td[.='" + product + "']/../td[.='Delete']/a/../../td[3]";
         WebElement productAmountElement = Driver.get().findElement(By.xpath(productAmountXPath));
-        HomePage.sum-=Integer.parseInt(productAmountElement.getText());
+        HomePage.sum -= Integer.parseInt(productAmountElement.getText());
         BrowserUtils.clickWithJS(element);
         Assert.assertEquals(ConfigurationReader.get("totalAmount"), String.valueOf(HomePage.sum));
         BrowserUtils.waitFor(1);
@@ -89,14 +93,11 @@ public class CartPage extends BasePage {
 
     public void verifyPurchaseAmount() {
         String text = confirmationMessage2.getText();
-        String amount =String.valueOf(HomePage.sum);
-        Assert.assertTrue(text.contains("Amount: "+amount+" USD"));
+        String amount = String.valueOf(HomePage.sum);
+        Assert.assertTrue(text.contains("Amount: " + amount + " USD"));
         BrowserUtils.waitFor(1);
 
     }
-
-
-
 
 
 }
