@@ -43,6 +43,7 @@ public class CartPage extends BasePage {
     public WebElement confirmationMessage2;
 
     public void fillForm() {
+        faker=new Faker();
         BrowserUtils.waitForVisibility(nameField, 5);
         nameField.sendKeys(faker.name().fullName());
         countryField.sendKeys(faker.address().country());

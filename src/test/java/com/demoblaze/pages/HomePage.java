@@ -44,6 +44,7 @@ public class HomePage extends BasePage {
         sum+=getUnitPrice(product);
         BrowserUtils.clickWithJS(addToCartButton);
         BrowserUtils.waitFor(2);
+        alert = Driver.get().switchTo().alert();
         alert.accept();
         BrowserUtils.waitFor(1);
         Driver.get().navigate().back();

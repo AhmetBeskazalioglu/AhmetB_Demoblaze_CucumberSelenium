@@ -1,3 +1,4 @@
+@regression
 Feature: Negative Login Test
   # As a user I want to be able to login with invalid credentials
 

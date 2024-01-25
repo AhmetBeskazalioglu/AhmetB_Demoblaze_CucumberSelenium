@@ -1,3 +1,4 @@
+@regression
 Feature: The user should be able to place order from website
 
   Background:

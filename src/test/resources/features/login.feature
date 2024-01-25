@@ -1,3 +1,4 @@
+@regression
 Feature: Login Test
   #As as  user: As a user I should be able to login with valid credentials
   Background:
