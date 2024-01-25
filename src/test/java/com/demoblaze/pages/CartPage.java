@@ -12,15 +12,8 @@ import org.openqa.selenium.support.FindBy;
 
 public class CartPage extends BasePage {
 
-    HomePage homePage = new HomePage();
-
-    Faker faker = new Faker();
-
     @FindBy(xpath = "//button[.='Place Order']")
     public WebElement placeOrderButton;
-
-    @FindBy(id = "totalp")
-    public WebElement totalAmount;
 
     @FindBy(id = "name")
     public WebElement nameField;
@@ -74,9 +67,9 @@ public class CartPage extends BasePage {
         BrowserUtils.waitForClickablility(element, 5);
         String productAmountXPath = "//td[.='" + product + "']/../td[.='Delete']/a/../../td[3]";
         WebElement productAmountElement = Driver.get().findElement(By.xpath(productAmountXPath));
-        HomePage.sum -= Integer.parseInt(productAmountElement.getText());
+        sum -= Integer.parseInt(productAmountElement.getText());
         BrowserUtils.clickWithJS(element);
-        Assert.assertEquals(ConfigurationReader.get("totalAmount"), String.valueOf(HomePage.sum));
+        Assert.assertEquals(ConfigurationReader.get("totalAmount"), String.valueOf(sum));
         BrowserUtils.waitFor(1);
 
     }
@@ -93,7 +86,7 @@ public class CartPage extends BasePage {
 
     public void verifyPurchaseAmount() {
         String text = confirmationMessage2.getText();
-        String amount = String.valueOf(HomePage.sum);
+        String amount = String.valueOf(sum);
         Assert.assertTrue(text.contains("Amount: " + amount + " USD"));
         BrowserUtils.waitFor(1);
 

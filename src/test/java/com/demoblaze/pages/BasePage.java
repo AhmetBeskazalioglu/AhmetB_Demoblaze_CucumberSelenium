@@ -19,6 +19,8 @@ public abstract class BasePage {
     protected Alert alert;
     protected Faker faker;
     protected WebDriverWait wait=new WebDriverWait(Driver.get(), Duration.ofSeconds(10));
+
+    public static int sum;
     @FindBy(xpath = "//a[.='Log in']")
     public WebElement loginButton;
     @FindBy(id="nameofuser")

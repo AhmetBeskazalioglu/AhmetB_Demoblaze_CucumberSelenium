@@ -12,14 +12,11 @@ import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends BasePage {
 
-    public static int sum;
-
     @FindBy(xpath = "//a[.='Add to cart']")
     public WebElement addToCartButton;
 
     @FindBy(css = ".price-container")
     public WebElement priceContainer;
-
 
 
     public void verifyWelcomeMessage() {
@@ -47,7 +44,6 @@ public class HomePage extends BasePage {
         sum+=getUnitPrice(product);
         BrowserUtils.clickWithJS(addToCartButton);
         BrowserUtils.waitFor(2);
-        Alert alert = Driver.get().switchTo().alert();
         alert.accept();
         BrowserUtils.waitFor(1);
         Driver.get().navigate().back();
@@ -60,8 +56,4 @@ public class HomePage extends BasePage {
         price = price.substring(1, price.indexOf("*"));
         return Integer.parseInt(price.trim());
     }
-
-
-
-
 }

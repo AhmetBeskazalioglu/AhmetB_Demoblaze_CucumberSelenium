@@ -18,12 +18,6 @@ public class LoginPage extends BasePage{
     @FindBy(xpath = "//button[.='Log in']")
     public WebElement loginButton2;
 
-    public void login(){
-        loginButton.click();
-        this.username.sendKeys(ConfigurationReader.get("username"));
-        this.password.sendKeys(ConfigurationReader.get("password"));
-        loginButton2.click();
-    }
     public void login(String username, String password){
         loginButton.click();
         this.username.sendKeys(username);
